@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Receiver - FoodSaver</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <h2>FoodSaver</h2>
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="donor.html">🧑‍🌾 Donor</a>
+    <a class="active" href="receiver.html">🤝 Receiver</a>
+    <a href="organization.html">🏢 Organization</a>
+    <a href="volunteer.html">🚗 Volunteer</a>
+    <a href="feedback.html">💬 Feedback</a>
+    <a href="support.html">📞 Support</a>
+    <a href="settings.html">⚙️ Settings</a>
+  </nav>
+
+  <main class="content">
+    <h2>🍽️ Available Food</h2>
+    <div id="foodList"></div>
+  </main>
+
+  <script>
+    const foodList = document.getElementById("foodList");
+    const items = JSON.parse(localStorage.getItem("donations") || "[]");
+    if (items.length === 0) {
+      foodList.innerHTML = "<p>No food currently available.</p>";
+    } else {
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "food-card";
+        div.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>${item.details}</p>
+          <p>📍 ${item.location}</p>
+          <p>🕒 Expires: ${new Date(item.expiry).toLocaleString()}</p>
+          <p>Type: ${item.type}</p>
+        `;
+        foodList.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

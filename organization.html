@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Organization - FoodSaver</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <h2>FoodSaver</h2>
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="donor.html">🧑‍🌾 Donor</a>
+    <a href="receiver.html">🤝 Receiver</a>
+    <a class="active" href="organization.html">🏢 Organization</a>
+    <a href="volunteer.html">🚗 Volunteer</a>
+    <a href="feedback.html">💬 Feedback</a>
+    <a href="support.html">📞 Support</a>
+    <a href="settings.html">⚙️ Settings</a>
+  </nav>
+
+  <main class="content">
+    <h2>🏢 Add Your Organization</h2>
+    <form id="orgForm">
+      <input type="text" id="orgName" placeholder="Organization Name" required />
+      <input type="text" id="orgPhone" placeholder="Contact Number" required />
+      <input type="text" id="orgAddress" placeholder="Address" required />
+      <label for="schedule">Pickup Schedule:</label>
+      <select id="schedule">
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="evening">Evening</option>
+      </select>
+      <button type="submit">Add Organization</button>
+    </form>
+    <div id="orgResult" style="color: green; margin-top: 1rem;"></div>
+  </main>
+
+  <script>
+    document.getElementById("orgForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const orgs = JSON.parse(localStorage.getItem("organizations") || "[]");
+      const org = {
+        name: document.getElementById("orgName").value,
+        phone: document.getElementById("orgPhone").value,
+        address: document.getElementById("orgAddress").value,
+        schedule: document.getElementById("schedule").value,
+      };
+      orgs.push(org);
+      localStorage.setItem("organizations", JSON.stringify(orgs));
+      document.getElementById("orgResult").textContent = "Organization saved!";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

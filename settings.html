@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings - FoodSaver</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <h2>FoodSaver</h2>
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="donor.html">🧑‍🌾 Donor</a>
+    <a href="receiver.html">🤝 Receiver</a>
+    <a href="organization.html">🏢 Organization</a>
+    <a href="volunteer.html">🚗 Volunteer</a>
+    <a href="feedback.html">💬 Feedback</a>
+    <a href="support.html">📞 Support</a>
+    <a class="active" href="settings.html">⚙️ Settings</a>
+  </nav>
+
+  <main class="content">
+    <h2>⚙️ App Settings</h2>
+    <button id="clearAll" style="background-color: red; color: white;">🗑️ Clear All Data</button>
+    <div id="settingsMsg" style="color: green; margin-top: 1rem;"></div>
+  </main>
+
+  <script>
+    document.getElementById("clearAll").addEventListener("click", () => {
+      if (confirm("Are you sure you want to delete all local data?")) {
+        localStorage.clear();
+        document.getElementById("settingsMsg").textContent = "All data has been cleared.";
+      }
+    });
+  </script>
+</body>
+</html>

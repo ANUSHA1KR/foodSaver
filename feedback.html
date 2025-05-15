@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feedback - FoodSaver</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <h2>FoodSaver</h2>
+    <a href="dashboard.html">🏠 Home</a>
+    <a href="donor.html">🧑‍🌾 Donor</a>
+    <a href="receiver.html">🤝 Receiver</a>
+    <a href="organization.html">🏢 Organization</a>
+    <a href="volunteer.html">🚗 Volunteer</a>
+    <a class="active" href="feedback.html">💬 Feedback</a>
+    <a href="support.html">📞 Support</a>
+    <a href="settings.html">⚙️ Settings</a>
+  </nav>
+
+  <main class="content">
+    <h2>💬 Share Your Feedback</h2>
+    <form id="feedbackForm">
+      <input type="text" id="username" placeholder="Your Name" required />
+      <textarea id="comments" placeholder="Your Feedback..." required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="feedbackMsg" style="color: green; margin-top: 1rem;"></div>
+  </main>
+
+  <script>
+    document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const feedbacks = JSON.parse(localStorage.getItem("feedbacks") || "[]");
+      feedbacks.push({
+        user: document.getElementById("username").value,
+        comment: document.getElementById("comments").value,
+      });
+      localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+      document.getElementById("feedbackMsg").textContent = "Thanks for your feedback!";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
